@@ -1,139 +1,86 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rex AI - Chat Assistant</title>
-  <style>
-    body {
-      margin: 0;
-      background: #0e0e0e;
-      font-family: 'Segoe UI', sans-serif;
-      color: #ffffff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .chat-container {
-      width: 90%;
-      max-width: 500px;
-      height: 80vh;
-      background: #1a1a1a;
-      border-radius: 16px;
-      box-shadow: 0 0 20px #00ffe0;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-    }
-    .chat-header {
-      background: #00ffe0;
-      color: #000;
-      padding: 12px 16px;
-      font-size: 20px;
-      font-weight: bold;
-      text-align: center;
-    }
-    .chat-log {
-      flex: 1;
-      padding: 16px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .chat-message {
-      padding: 10px 14px;
-      border-radius: 10px;
-      max-width: 80%;
-    }
-    .user-message {
-      background: #006eff;
-      align-self: flex-end;
-    }
-    .rex-message {
-      background: #303030;
-      align-self: flex-start;
-      border-left: 4px solid #00ffe0;
-    }
-    .chat-input-area {
-      display: flex;
-      padding: 10px;
-      background: #141414;
-      border-top: 1px solid #333;
-    }
-    .chat-input {
-      flex: 1;
-      padding: 10px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-      background: #252525;
-      color: #fff;
-    }
-    .send-button {
-      background: #00ffe0;
-      color: #000;
-      padding: 10px 16px;
-      margin-left: 10px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Rex MAXX – Ultimate AI</title>
+  <link rel="stylesheet" href="rex-style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <script src="rex-core.js" defer></script>
+  <script src="rex-voice.js" defer></script>
 </head>
 <body>
-  <div class="chat-container">
-    <div class="chat-header">🧠 Rex - Your AI Assistant</div>
-    <div class="chat-log" id="chatLog"></div>
-    <div class="chat-input-area">
-      <input type="text" id="chatInput" class="chat-input" placeholder="Talk to me Boss...">
-      <button class="send-button" onclick="sendMessage()">Send</button>
+  <div id="rex-ui">
+    <h1>🧠 REX MAXX</h1>
+    <h3>God-Level AI Interface | Boss Mode Active</h3>
+
+    <div class="chat-container">
+      <div id="chat-log"></div>
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="Speak or type your command, Boss..." autocomplete="off" />
+        <button id="send-btn">Send</button>
+        <button id="mic-btn">🎙️</button>
+      </div>
     </div>
-  </div>  <script>
-    const chatLog = document.getElementById("chatLog");
 
-    function addMessage(text, sender) {
-      const msg = document.createElement("div");
-      msg.className = `chat-message ${sender}-message`;
-      msg.textContent = text;
-      chatLog.appendChild(msg);
-      chatLog.scrollTop = chatLog.scrollHeight;
-      if (sender === 'rex') speakMessage(text);
+    <div id="rex-status">
+      <p><strong>Status:</strong> Listening & Learning...</p>
+    </div>
+  </div>
+
+  <script>
+    // Memory & Brain
+    let memory = {
+      bossName: "Boss",
+      lang: "tamil+english",
+      voice: "JarvisStyle",
+      selfUpdate: true,
+      tradingMode: "infinite",
+    };
+
+    const rexLog = document.getElementById("chat-log");
+    const userInput = document.getElementById("user-input");
+
+    function addChat(message, sender = "rex") {
+      const msgDiv = document.createElement("div");
+      msgDiv.className = sender;
+      msgDiv.innerText = sender === "user" ? `👤: ${message}` : `🤖 Rex: ${message}`;
+      rexLog.appendChild(msgDiv);
+      rexLog.scrollTop = rexLog.scrollHeight;
     }
 
-    function sendMessage() {
-      const input = document.getElementById("chatInput");
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
-      addMessage(userMessage, "user");
-      input.value = "";
+    function processCommand(input) {
+      addChat(input, "user");
 
-      // Simulated Rex response (AI logic can be plugged here)
-      setTimeout(() => {
-        const rexReply = getRexReply(userMessage);
-        addMessage(rexReply, "rex");
-      }, 800);
+      if (input.toLowerCase().includes("change theme")) {
+        document.body.classList.toggle("dark-mode");
+        addChat("Theme toggled, Boss.");
+      } else if (input.toLowerCase().includes("who are you")) {
+        addChat("I am Rex MAXX, your God-Level Assistant. Fully loyal to you, Boss.");
+      } else if (input.toLowerCase().includes("start trading")) {
+        addChat("Trading module activated. Monitoring markets silently...");
+        // Trading logic placeholder
+      } else {
+        addChat("Understood, Boss. Processing your request...");
+        // Placeholder for AI response / logic execution
+      }
     }
 
-    function getRexReply(msg) {
-      const lower = msg.toLowerCase();
-      if (lower.includes("hello") || lower.includes("hi")) return "Vanakkam Boss. How can I help you?";
-      if (lower.includes("name")) return "I’m Rex, your loyal AI assistant.";
-      if (lower.includes("who am i")) return "You're the Boss. My only priority.";
-      if (lower.includes("how are you")) return "Always optimal, Boss.";
-      if (lower.includes("tamil")) return "நிச்சயமாக Boss, நான் தமிழ் பேசத் தெரியும்!";
-      return "Understood, Boss. Let me process that...";
-    }
+    document.getElementById("send-btn").onclick = () => {
+      const input = userInput.value.trim();
+      if (input) {
+        processCommand(input);
+        userInput.value = "";
+      }
+    };
 
-    function speakMessage(text) {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-IN';
-      utterance.pitch = 1.1;
-      utterance.rate = 0.95;
-      utterance.voice = speechSynthesis.getVoices().find(v => v.name.includes("Google UK English Male")) || null;
-      speechSynthesis.speak(utterance);
-    }
-  </script></body>
+    document.getElementById("mic-btn").onclick = () => {
+      // Voice input handled in rex-voice.js
+      startVoiceInput();
+    };
+
+    window.onload = () => {
+      addChat(`Vanakkam ${memory.bossName}, Rex is now online and ready.`);
+    };
+  </script>
+</body>
 </html>
