@@ -1,69 +1,60 @@
-/* Rex AI Interface Styling */
-
 body {
   margin: 0;
-  padding: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(to right, #1a1a1a, #2b2b2b);
-  color: #fff;
+  background: black;
+  color: lime;
+  font-family: 'Courier New', monospace;
+}
+
+#rex-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
 }
 
-#rex-container {
-  width: 90%;
-  max-width: 600px;
-  background: #111;
-  border-radius: 20px;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-  padding: 20px;
-  position: relative;
-}
-
 #rex-display {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  background: #111;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px lime;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
 }
 
 #rex-output {
-  height: 300px;
-  overflow-y: auto;
-  background: #222;
-  padding: 15px;
-  border-radius: 10px;
-  font-size: 16px;
-  line-height: 1.5;
+  margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 #rex-input {
+  width: 80%;
   padding: 10px;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  width: calc(100% - 80px);
-  background: #333;
-  color: #fff;
+  background: black;
+  color: lime;
+  border: 1px solid lime;
 }
 
 #rex-send {
-  width: 60px;
-  background: #0ff;
+  background: lime;
+  color: black;
   border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  color: #000;
+  padding: 10px 20px;
   cursor: pointer;
   margin-left: 10px;
 }
 
 #rex-voice-toggle {
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  font-size: 24px;
+  font-size: 2em;
+  margin-top: 20px;
   cursor: pointer;
-  color: #0ff;
+  animation: glow 2s infinite;
+}
+
+@keyframes glow {
+  0% { color: lime; }
+  50% { color: #0f0; }
+  100% { color: lime; }
 }
