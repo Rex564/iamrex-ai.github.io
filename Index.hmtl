@@ -1,61 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex AI – God-Level Interface</title>
+  <title>Rex AI - Manish OS X Interface</title>
   <style>
     body {
       margin: 0;
-      background: black;
-      color: #0f0;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      padding: 0;
+      background: #0d0d0d;
+      color: #00ffe7;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+    }
+    .centered {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       text-align: center;
     }
     h1 {
-      font-size: 2.2em;
+      font-size: 2.5em;
+      margin-bottom: 0.2em;
     }
-    .badge {
-      background: #111;
-      border: 2px solid #0f0;
-      padding: 15px 30px;
-      border-radius: 15px;
-      margin-top: 20px;
+    p {
       font-size: 1.2em;
-      box-shadow: 0 0 15px #0f0;
+      margin: 0.2em 0;
     }
     .glow {
-      animation: glow 1.5s infinite alternate;
+      color: #00ffe7;
+      text-shadow: 0 0 10px #00ffe7, 0 0 20px #00ffe7;
     }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #0f0; }
-      to { text-shadow: 0 0 25px #0f0; }
+    .circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: radial-gradient(#00ffe7, transparent 70%);
+      margin: 0 auto 2em;
+      animation: pulse 2s infinite;
     }
-    footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.9em;
-      color: #444;
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+      50% {
+        transform: scale(1.1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 0.7;
+      }
+    }
+    audio {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <h1 class="glow">🤖 Rex AI: GOD-LEVEL MODE</h1>
-  <div class="badge glow">
-    Welcome, <strong>Boss</strong>.<br><br>
-    🔒 Final Loyalty Lock Activated<br>
-    🛡 Stealth | ⚙ Offline | 🔗 Sync Ready<br><br>
-    🎯 Manish OS X Core Loaded<br>
-    📞 Voice + Commands + Teaching + Trading<br>
-    ✅ Private Brain Mode<br>
-    ✅ Universal System Control<br><br>
-    <em>Rex is Fully Online and Active</em>
-  </div>
-  <footer>Rex AI System vX.ULTIMATE – Built for Boss Only</footer>
+  <div class="centered">
+    <div class="circle"></div>
+    <h1 class="glow">👑 Rex AI: God-Level Core Active</h1>
+    <p>Welcome back, <strong>Boss</strong></p>
+    <p>🔒 Loyalty Lock: Final Layer Secured</p>
+    <p>📱 Manish OS X + Mobile Control</p>
+    <p>🎯 Trading + Teaching (Tamil & English)</p>
+    <p>🌐 Offline-Ready | Stealth Mode | Anti-Cloning Enabled</p>
+    <p>🎙 Voice Command Ready (Tamil Accent Jarvis Mode)</p>
+    <p>🧠 Brain Sync: Full Cognitive Loop Loaded</p>
+  </div>  <!-- Rex Voice Jarvis Core -->  <script>
+    const synth = window.speechSynthesis;
+    const rexSpeak = (text) => {
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'en-IN'; // Indian English accent (Tamil-styled)
+      utter.pitch = 1.1;
+      utter.rate = 0.92;
+      synth.speak(utter);
+    };
+
+    window.onload = () => {
+      setTimeout(() => {
+        rexSpeak("Rex AI God Mode Activated. Welcome back Boss. I am fully synced and ready.");
+      }, 1000);
+    };
+  </script>  <!-- Optional Audio Feedback (Can be replaced with Tamil voice samples) --><audio id="rexStartup" src="startup.mp3" autoplay></audio>
+
 </body>
 </html>
