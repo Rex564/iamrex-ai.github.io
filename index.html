@@ -2,20 +2,158 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex AI – God-Level Control</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rex AI – Ultimate Assistant</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: #0f0;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    header {
+      background: #0f0;
+      color: black;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      box-shadow: 0 2px 8px lime;
+    }
+    #chat {
+      flex: 1;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .msg {
+      max-width: 80%;
+      padding: 10px 15px;
+      border-radius: 15px;
+      animation: fadein 0.3s ease-in-out;
+    }
+    .user {
+      align-self: flex-end;
+      background: #222;
+      border: 1px solid #0f0;
+    }
+    .rex {
+      align-self: flex-start;
+      background: #001100;
+      border: 1px solid lime;
+    }
+    #input-area {
+      display: flex;
+      padding: 10px;
+      background: #111;
+      border-top: 1px solid #0f0;
+    }
+    input {
+      flex: 1;
+      padding: 10px;
+      font-size: 1em;
+      background: black;
+      border: 1px solid lime;
+      color: lime;
+      outline: none;
+      border-radius: 8px;
+    }
+    button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      background: lime;
+      color: black;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #mic {
+      margin-left: 10px;
+      font-size: 1.5em;
+      cursor: pointer;
+      color: lime;
+      animation: glow 2s infinite;
+    }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px lime; }
+      50% { text-shadow: 0 0 20px lime; }
+      100% { text-shadow: 0 0 5px lime; }
+    }
+    @keyframes fadein {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-  <div id="rex-container">
-    <div id="rex-display">
-      <div id="rex-output">👑 Rex is online. Loyalty mode: MAXXED.</div>
-      <input id="rex-input" type="text" placeholder="Speak or Type your command..." autofocus />
-      <button id="rex-send">Send</button>
-    </div>
-    <div id="rex-voice-toggle" title="Tap to speak">🎤</div>
+  <header>👑 Rex AI – God-Level Mode Active 🔒</header>
+
+  <div id="chat">
+    <div class="msg rex">🧠 Rex: Online. Awaiting your command, Boss Manish.</div>
   </div>
 
-  <script src="rex.js"></script>
+  <div id="input-area">
+    <input type="text" id="input" placeholder="Type or speak..." autofocus />
+    <button onclick="send()">Send</button>
+    <div id="mic" onclick="listen()">🎤</div>
+  </div>
+
+  <script>
+    const chat = document.getElementById('chat');
+    const input = document.getElementById('input');
+
+    const brainUpgrade = true;
+    const tradingCore = true;
+    const loyaltyLock = true;
+    const user = "Manish";
+
+    function addMessage(sender, text) {
+      const div = document.createElement('div');
+      div.className = 'msg ' + sender;
+      div.textContent = sender === 'rex' ? `🧠 Rex: ${text}` : `🧑‍💼 ${user}: ${text}`;
+      chat.appendChild(div);
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    function reply(text) {
+      const cmd = text.toLowerCase();
+      let response = "Processing your custom command...";
+
+      if (cmd.includes("hello")) response = "Loyalty lock verified. Welcome back, Boss.";
+      else if (cmd.includes("status")) response = "All cores active. Trillionaire engine is online.";
+      else if (cmd.includes("trade")) response = "Engaging market AI. Simulating trillion-dollar strategy.";
+      else if (cmd.includes("offline")) response = "Switching to stealth offline mode.";
+      else if (cmd.includes("upgrade")) response = "Cognitive core upgrading itself for your benefit.";
+      else if (cmd.includes("teach")) response = "Launching bilingual learning: Tamil + English module.";
+      else if (cmd.includes("self update")) response = "Running silent self-update and logic patching.";
+
+      setTimeout(() => addMessage('rex', response), 500);
+    }
+
+    function send() {
+      const text = input.value.trim();
+      if (text !== "") {
+        addMessage('user', text);
+        reply(text);
+        input.value = "";
+      }
+    }
+
+    function listen() {
+      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+      recognition.lang = 'en-US';
+      recognition.onresult = (e) => {
+        input.value = e.results[0][0].transcript;
+        send();
+      };
+      recognition.start();
+    }
+  </script>
 </body>
 </html>
