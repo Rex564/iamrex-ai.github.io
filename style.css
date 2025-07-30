@@ -1,72 +1,69 @@
+/* Rex AI Interface Styling */
+
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #0a0a0a;
-  color: #00ffe0;
+  padding: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(to right, #1a1a1a, #2b2b2b);
+  color: #fff;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100vh;
 }
 
 #rex-container {
-  width: 95%;
-  max-width: 500px;
-  background: #121212;
-  border: 2px solid #00ffe0;
-  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  background: #111;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
   padding: 20px;
-  box-shadow: 0 0 20px #00ffe0;
   position: relative;
 }
 
 #rex-display {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 #rex-output {
-  height: 250px;
+  height: 300px;
   overflow-y: auto;
-  padding: 10px;
-  background: #000;
-  border-radius: 8px;
-  font-size: 14px;
-  border: 1px solid #00ffe0;
+  background: #222;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 #rex-input {
   padding: 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
-  outline: none;
-  background: #1c1c1c;
-  color: #00ffe0;
-  border: 1px solid #00ffe0;
+  width: calc(100% - 80px);
+  background: #333;
+  color: #fff;
 }
 
 #rex-send {
-  padding: 10px;
-  font-size: 16px;
+  width: 60px;
+  background: #0ff;
   border: none;
-  background: #00ffe0;
+  border-radius: 10px;
+  font-size: 16px;
   color: #000;
-  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-#rex-send:hover {
-  background: #00bfa0;
+  margin-left: 10px;
 }
 
 #rex-voice-toggle {
   position: absolute;
-  bottom: 15px;
+  bottom: 20px;
   right: 20px;
   font-size: 24px;
   cursor: pointer;
-  color: #00ffe0;
+  color: #0ff;
 }
