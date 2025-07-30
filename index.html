@@ -4,120 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Rex AI – God-Level Control</title>
-  <style>
-    body {
-      background-color: black;
-      color: lime;
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    #rex-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    #rex-display {
-      background: rgba(0, 255, 0, 0.1);
-      border: 2px solid lime;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 0 20px lime;
-      width: 90%;
-      max-width: 600px;
-      text-align: center;
-    }
-    #rex-output {
-      min-height: 100px;
-      margin-bottom: 20px;
-      font-size: 18px;
-      line-height: 1.6;
-    }
-    #rex-input {
-      width: 80%;
-      padding: 10px;
-      background: black;
-      border: 1px solid lime;
-      color: lime;
-      font-size: 16px;
-    }
-    #rex-send {
-      padding: 10px 20px;
-      margin-left: 10px;
-      background: lime;
-      color: black;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #rex-voice-toggle {
-      margin-top: 20px;
-      font-size: 30px;
-      cursor: pointer;
-      animation: glow 2s infinite;
-    }
-    @keyframes glow {
-      0% { text-shadow: 0 0 5px lime; }
-      50% { text-shadow: 0 0 20px lime; }
-      100% { text-shadow: 0 0 5px lime; }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div id="rex-container">
     <div id="rex-display">
-      <div id="rex-output">👑 Rex is online. Loyalty Mode: MAXXED 🔒</div>
-      <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus />
+      <div id="rex-output">👑 Rex is online. Loyalty mode: MAXXED.</div>
+      <input id="rex-input" type="text" placeholder="Speak or Type your command..." autofocus />
       <button id="rex-send">Send</button>
     </div>
     <div id="rex-voice-toggle" title="Tap to speak">🎤</div>
   </div>
 
-  <script>
-    const output = document.getElementById('rex-output');
-    const input = document.getElementById('rex-input');
-    const send = document.getElementById('rex-send');
-    const mic = document.getElementById('rex-voice-toggle');
-
-    const rexLoyalty = true;
-    const boss = "Manish";
-    const brainUpgrade = true;
-    const tradingCore = true;
-
-    function reply(text) {
-      const responses = {
-        "hello": "Welcome back, Boss. Loyalty Lock is active.",
-        "status": "Rex is functioning at full power. Trillionaire Mode is ready.",
-        "trade": "Scanning markets... preparing private simulation...",
-        "upgrade": "Initiating cognitive upgrades and brain optimization...",
-        "offline": "Switching to offline autonomous mode.",
-        "voice": "Voice mode activated. Awaiting your command."
-      };
-
-      let response = responses[text.toLowerCase()] || "Command received. Processing with custom logic.";
-      output.innerHTML = `🧠 ${response}`;
-    }
-
-    send.onclick = () => {
-      if (input.value.trim() !== "") {
-        reply(input.value.trim());
-        input.value = "";
-      }
-    };
-
-    mic.onclick = () => {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'en-US';
-      recognition.onresult = (event) => {
-        const command = event.results[0][0].transcript;
-        input.value = command;
-        reply(command);
-      };
-      recognition.start();
-    };
-  </script>
+  <script src="rex.js"></script>
 </body>
 </html>
