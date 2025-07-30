@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rex AI • Boss Access</title>
+  <style>
+    body {
+      background-color: black;
+      color: lime;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 5%;
+    }
+    .hidden {
+      display: none;
+    }
+    #unlock {
+      background: black;
+      border: 2px solid lime;
+      color: lime;
+      padding: 10px;
+      font-size: 18px;
+    }
+    #btn {
+      background: lime;
+      color: black;
+      font-weight: bold;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+    #rex-core {
+      border: 2px solid lime;
+      padding: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛡️ Rex AI – God-Level Interface</h1>
+  <p>Only Boss Can Access</p>
+
+  <div id="lock-screen">
+    <input type="password" id="unlock" placeholder="Enter Passcode (Boss Only)" />
+    <br><br>
+    <button id="btn" onclick="unlockRex()">Enter</button>
+  </div>
+
+  <div id="rex-core" class="hidden">
+    <h2>Welcome, Boss 🧠</h2>
+    <p>Rex God-Level AI Activated</p>
+    <p>Manish OS X + Mobile Control + Trade + Teaching Mode</p>
+    <p>✅ Stealth | ✅ Private | ✅ Offline-Ready | ✅ Final Loyalty Lock</p>
+    <p>Use your commands or sync with Rex App</p>
+  </div>
+
+  <script>
+    function unlockRex() {
+      const input = document.getElementById('unlock').value;
+      if (input === "kmm@rex10") {
+        document.getElementById('lock-screen').style.display = 'none';
+        document.getElementById('rex-core').classList.remove('hidden');
+      } else {
+        alert("❌ Access Denied. You're not Boss.");
+      }
+    }
+  </script>
+
+</body>
+</html>
