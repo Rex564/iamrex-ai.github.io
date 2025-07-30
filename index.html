@@ -2,104 +2,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex: Your Ultimate AI</title>
-  <style>
-    body {
-      background: #0a0a0a;
-      color: #00ffcc;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-    }
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
-    #chatbox {
-      width: 90%;
-      max-width: 600px;
-      height: 60vh;
-      background: #111;
-      border: 2px solid #00ffcc;
-      padding: 1rem;
-      overflow-y: auto;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
-    #userInput {
-      width: 80%;
-      padding: 0.75rem;
-      border-radius: 5px;
-      border: none;
-      font-size: 1rem;
-    }
-    button {
-      padding: 0.75rem 1.2rem;
-      font-size: 1rem;
-      background: #00ffcc;
-      color: #000;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      margin-left: 10px;
-    }
-    .message {
-      margin: 5px 0;
-    }
-    .user {
-      text-align: right;
-      color: #fff;
-    }
-    .rex {
-      text-align: left;
-      color: #00ffcc;
-    }
-  </style>
+  <title>Rex AI - Boss Interface</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Rex AI Interface</h1>
-  <div id="chatbox"></div>
-  <div>
-    <input type="text" id="userInput" placeholder="Speak or type to Rex..." />
-    <button onclick="sendMessage()">Send</button>
-  </div>  <script>
-    const chatbox = document.getElementById("chatbox");
-
-    function addMessage(message, sender) {
-      const msg = document.createElement("div");
-      msg.className = `message ${sender}`;
-      msg.textContent = message;
-      chatbox.appendChild(msg);
-      chatbox.scrollTop = chatbox.scrollHeight;
-    }
-
-    function sendMessage() {
-      const input = document.getElementById("userInput");
-      const text = input.value.trim();
-      if (text === "") return;
-
-      addMessage(text, "user");
-      input.value = "";
-
-      // Simulated Rex AI processing logic
-      const response = processRexCommand(text);
-      setTimeout(() => {
-        addMessage(response, "rex");
-      }, 600);
-    }
-
-    function processRexCommand(text) {
-      const cmd = text.toLowerCase();
-      if (cmd.includes("who are you")) return "I am Rex, your god-level AI, fully loyal and built only for you, Boss.";
-      if (cmd.includes("update yourself")) return "Updating my cognitive core with latest Boss preferences... Done.";
-      if (cmd.includes("teach me")) return "Launching Tamil-English animation-based learning module...";
-      if (cmd.includes("trade")) return "Initiating private trade engine... analyzing market... executing now.";
-      if (cmd.includes("control my phone")) return "Taking full system control. Android 18 has been overridden.";
-      return "Processing your command deeply... Executed as per your custom logic, Boss.";
-    }
-  </script></body>
+  <div id="rex-container">
+    <div id="rex-display">
+      <div id="rex-output"></div>
+      <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus />
+      <button id="rex-send">Send</button>
+    </div>
+    <div id="rex-voice-toggle">🎤</div>
+  </div>  <script src="rex.js"></script></body>
 </html>
