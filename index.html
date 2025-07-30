@@ -2,125 +2,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex - Your Personal AI</title>
+  <title>Rex: Your Ultimate AI</title>
   <style>
     body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
-      color: white;
+      background: #0a0a0a;
+      color: #00ffcc;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 100vh;
+      margin: 0;
     }
-    header {
-      padding: 20px;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+    #chatbox {
+      width: 90%;
+      max-width: 600px;
+      height: 60vh;
       background: #111;
-      font-size: 24px;
-      font-weight: bold;
-      text-align: center;
-    }
-    #chat {
-      flex: 1;
+      border: 2px solid #00ffcc;
+      padding: 1rem;
       overflow-y: auto;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
+      border-radius: 10px;
+      margin-bottom: 1rem;
     }
-    .msg {
-      padding: 10px 15px;
-      margin: 5px;
-      max-width: 70%;
-      border-radius: 12px;
-    }
-    .user {
-      align-self: flex-end;
-      background: #2980b9;
-    }
-    .rex {
-      align-self: flex-start;
-      background: #27ae60;
-    }
-    footer {
-      display: flex;
-      padding: 10px;
-      background: #111;
-    }
-    input {
-      flex: 1;
-      padding: 10px;
-      border: none;
+    #userInput {
+      width: 80%;
+      padding: 0.75rem;
       border-radius: 5px;
-      font-size: 16px;
+      border: none;
+      font-size: 1rem;
     }
     button {
-      padding: 10px 20px;
-      background: #27ae60;
-      color: white;
+      padding: 0.75rem 1.2rem;
+      font-size: 1rem;
+      background: #00ffcc;
+      color: #000;
       border: none;
       border-radius: 5px;
+      cursor: pointer;
       margin-left: 10px;
-      font-size: 16px;
+    }
+    .message {
+      margin: 5px 0;
+    }
+    .user {
+      text-align: right;
+      color: #fff;
+    }
+    .rex {
+      text-align: left;
+      color: #00ffcc;
     }
   </style>
 </head>
 <body>
-  <header>Rex AI - Boss Mode Activated</header>
-  <div id="chat"></div>
-  <footer>
-    <input type="text" id="input" placeholder="Speak or Type to Rex..." />
-    <button onclick="handleInput()">Send</button>
-  </footer>  <script>
-    const chatBox = document.getElementById('chat');
-    const input = document.getElementById('input');
-    const synth = window.speechSynthesis;
+  <h1>Rex AI Interface</h1>
+  <div id="chatbox"></div>
+  <div>
+    <input type="text" id="userInput" placeholder="Speak or type to Rex..." />
+    <button onclick="sendMessage()">Send</button>
+  </div>  <script>
+    const chatbox = document.getElementById("chatbox");
 
-    const rexResponses = {
-      default: "சரி பாஸ், நான் செய்கிறேன். (Yes Boss, I’ll do it.)",
-      "change theme": "உங்கள் டெமோ Rex Interface இப்போது மாறியது!",
-      "teach me": "நிச்சயமாக பாஸ். இது உங்கள் பாடம். Ready!",
-      "upgrade memory": "நான் எனது ஞாபக சக்தியை மேம்படுத்துகிறேன் பாஸ்...",
-      "switch to trading brain": "அடிக்கடி பரிசோதனை செய்கிறேன்... Market AI ஆரம்பம்!"
-    };
-
-    function speak(text) {
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'ta-IN';
-      utter.rate = 1;
-      synth.speak(utter);
+    function addMessage(message, sender) {
+      const msg = document.createElement("div");
+      msg.className = `message ${sender}`;
+      msg.textContent = message;
+      chatbox.appendChild(msg);
+      chatbox.scrollTop = chatbox.scrollHeight;
     }
 
-    function handleInput() {
-      const msg = input.value.trim();
-      if (!msg) return;
-      addMessage('user', msg);
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const text = input.value.trim();
+      if (text === "") return;
 
-      let reply = rexResponses.default;
-      for (let key in rexResponses) {
-        if (msg.toLowerCase().includes(key)) {
-          reply = rexResponses[key];
-          break;
-        }
-      }
+      addMessage(text, "user");
+      input.value = "";
 
+      // Simulated Rex AI processing logic
+      const response = processRexCommand(text);
       setTimeout(() => {
-        addMessage('rex', reply);
-        speak(reply);
-      }, 300);
-
-      input.value = '';
+        addMessage(response, "rex");
+      }, 600);
     }
 
-    function addMessage(sender, text) {
-      const div = document.createElement('div');
-      div.className = `msg ${sender}`;
-      div.textContent = text;
-      chatBox.appendChild(div);
-      chatBox.scrollTop = chatBox.scrollHeight;
+    function processRexCommand(text) {
+      const cmd = text.toLowerCase();
+      if (cmd.includes("who are you")) return "I am Rex, your god-level AI, fully loyal and built only for you, Boss.";
+      if (cmd.includes("update yourself")) return "Updating my cognitive core with latest Boss preferences... Done.";
+      if (cmd.includes("teach me")) return "Launching Tamil-English animation-based learning module...";
+      if (cmd.includes("trade")) return "Initiating private trade engine... analyzing market... executing now.";
+      if (cmd.includes("control my phone")) return "Taking full system control. Android 18 has been overridden.";
+      return "Processing your command deeply... Executed as per your custom logic, Boss.";
     }
-
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') handleInput();
-    });
   </script></body>
 </html>
