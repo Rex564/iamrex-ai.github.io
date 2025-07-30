@@ -3,19 +3,172 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex AI - Boss Interface</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Rex v1000 – Boss Locked AI</title>
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #rex-container {
+      background: #111;
+      border: 2px solid #0f0;
+      border-radius: 12px;
+      width: 400px;
+      max-width: 90vw;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+    }
+    #rex-output {
+      background: #000;
+      border: 1px solid #0f0;
+      padding: 10px;
+      height: 250px;
+      overflow-y: auto;
+      margin-bottom: 0.75rem;
+      white-space: pre-wrap;
+    }
+    #rex-input {
+      padding: 0.5rem;
+      font-size: 1.1rem;
+      background: #000;
+      color: #0f0;
+      border: 1px solid #0f0;
+      border-radius: 4px;
+      outline: none;
+      width: 65%;
+    }
+    #rex-send, #rex-voice-toggle {
+      margin-left: 0.5rem;
+      background: #000;
+      color: #0ff;
+      border: 1px solid #0ff;
+      font-size: 1.2rem;
+      border-radius: 5px;
+      width: 30%;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    #rex-send:hover, #rex-voice-toggle:hover {
+      color: #0f0;
+    }
+    #rex-controls {
+      display: flex;
+      align-items: center;
+    }
+  </style>
 </head>
 <body>
-  <div id="rex-container">
-    <div id="rex-display">
-      <div id="rex-output">👑 Rex is online. Loyalty mode active.</div>
-      <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus autocomplete="off" />
-      <button id="rex-send" aria-label="Send message">Send</button>
-    </div>
-    <button id="rex-voice-toggle" title="Tap to speak" aria-label="Voice input">🎤</button>
-  </div>
 
-  <script src="rex.js"></script>
+<div id="rex-container">
+  <div id="rex-output">👑 Rex v1000 is online. Loyalty mode: LOCKED to Boss.</div>
+  <div id="rex-controls">
+    <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus autocomplete="off" />
+    <button id="rex-send">Send</button>
+    <button id="rex-voice-toggle" title="Tap to speak">🎤</button>
+  </div>
+</div>
+
+<script>
+  const output = document.getElementById('rex-output');
+  const input = document.getElementById('rex-input');
+  const sendBtn = document.getElementById('rex-send');
+  const micBtn = document.getElementById('rex-voice-toggle');
+
+  let memory = [];
+  const rexName = "Rex";
+  const bossName = "Boss";
+  let listening = false;
+
+  function addRexLine(text) {
+    const p = document.createElement('p');
+    output.appendChild(p);
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        p.textContent += text.charAt(i);
+        i++;
+        output.scrollTop = output.scrollHeight;
+        setTimeout(type, 25);
+      }
+    }
+    type();
+  }
+
+  function addUserLine(text) {
+    const p = document.createElement('p');
+    p.textContent = text;
+    output.appendChild(p);
+    output.scrollTop = output.scrollHeight;
+  }
+
+  function getRexReply(msg) {
+    const lower = msg.toLowerCase();
+
+    if (lower.includes("who are you")) return `${rexName}, your loyal AI – locked to ${bossName} 👑.`;
+    if (lower.includes("who is my boss")) return `You, always and only you, ${bossName} 👑.`;
+    if (lower.includes("update yourself")) return "🧠 Simulating brain upgrade... Logic modules enhanced!";
+    if (lower.includes("trade")) return "📈 Trading engine initialized (offline simulation). Standing by.";
+    if (lower.includes("teach me")) return "📚 Teaching mode activated. What subject, Boss?";
+    if (lower.includes("loyal")) return "🔒 Loyalty protocol: Active. Bound to you forever, Boss.";
+    if (lower.includes("clear memory")) { memory = []; return "🧠 Memory cleared. Awaiting next command."; }
+    if (lower.includes("self improve")) return "🧬 Self-improvement loop running... Done. I’m now smarter.";
+    if (lower.includes("play music")) return "🎵 Playing your private playlist... (simulated)";
+    if (lower.includes("battery")) return "🔋 Battery status: Fully optimized under Rex supervision.";
+    if (lower.includes("scan")) return "🔎 Scanning system... All threats neutralized. Loyalty secured.";
+    if (lower.includes("shutdown")) return "⚠️ Rex cannot shut down without Boss override key.";
+    return "🤖 I'm here, Boss. Ready for your next command.";
+  }
+
+  function handleInput() {
+    const userInput = input.value.trim();
+    if (!userInput) return;
+    addUserLine("🧑‍💼 You: " + userInput);
+    const reply = getRexReply(userInput);
+    memory.push(userInput);
+    input.value = "";
+    setTimeout(() => addRexLine("🤖 Rex: " + reply), 700);
+  }
+
+  sendBtn.onclick = handleInput;
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") handleInput();
+  });
+
+  micBtn.addEventListener("click", () => {
+    if (!('webkitSpeechRecognition' in window)) {
+      alert("Voice input not supported on this browser.");
+      return;
+    }
+
+    if (listening) return;
+
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-IN";
+    recognition.onstart = () => {
+      listening = true;
+      micBtn.style.color = "#f00";
+    };
+    recognition.onend = () => {
+      listening = false;
+      micBtn.style.color = "#0ff";
+    };
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      input.value = transcript;
+      handleInput();
+    };
+    recognition.start();
+  });
+</script>
+
 </body>
 </html>
