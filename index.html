@@ -21,3 +21,33 @@
   </div>
 </body>
 </html>
+<script>
+  // Rex Voice Activation Handler
+  document.getElementById("mic").addEventListener("click", () => {
+    if ('speechSynthesis' in window) {
+      const msg = new SpeechSynthesisUtterance("Yes Boss, I'm listening");
+      msg.lang = 'en-IN'; // English India. Change to 'ta-IN' for Tamil
+      speechSynthesis.speak(msg);
+    }
+
+    if ('webkitSpeechRecognition' in window) {
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = 'en-IN'; // Change to 'ta-IN' for Tamil mode
+      recognition.start();
+
+      recognition.onresult = (event) => {
+        const command = event.results[0][0].transcript;
+        document.getElementById("user-input").value = command;
+        document.getElementById("send-btn").click();
+      };
+    } else {
+      alert("Voice recognition not supported in this browser.");
+    }
+  });
+
+  // Self-Upgrade Mode (Simulated Logic)
+  window.addEventListener("load", () => {
+    console.log("🔁 Rex Self-Upgrade System Ready");
+    // Example: fetch updates in future or load extra .js modules
+  });
+</script>
