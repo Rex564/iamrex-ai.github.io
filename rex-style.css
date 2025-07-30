@@ -1,30 +1,41 @@
 body {
-  background-color: #0e0e0e;
-  color: #00ffe0;
+  background-color: #000;
+  color: #0f0;
   font-family: 'Orbitron', sans-serif;
-  text-align: center;
-  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
 #rex-box {
-  border: 2px solid #00ffe0;
-  border-radius: 20px;
+  border: 2px solid #0f0;
   padding: 2rem;
-  background: #1a1a1a;
-  box-shadow: 0 0 30px #00ffe0;
+  border-radius: 12px;
+  background-color: #111;
+  width: 400px;
+  text-align: center;
 }
 
-input, button {
+input[type="text"] {
+  width: 80%;
   padding: 10px;
+  margin-top: 1rem;
   font-size: 1rem;
-  margin: 10px;
-  border-radius: 8px;
-  border: none;
+  background-color: #000;
+  color: #0f0;
+  border: 1px solid #0f0;
+  border-radius: 5px;
 }
 
-#mic {
-  background-color: #00ffe0;
-  color: black;
-  border-radius: 50%;
-  padding: 15px;
+button {
+  margin: 1rem 0.5rem;
+  padding: 10px 15px;
+  background-color: #0f0;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
 }
