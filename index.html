@@ -1,108 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rex God-Mode Interface</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rex AI - Chat Assistant</title>
   <style>
     body {
       margin: 0;
-      padding: 0;
-      background: radial-gradient(circle at center, #0f0f0f 0%, #000000 100%);
-      color: #00ffe5;
+      background: #0e0e0e;
       font-family: 'Segoe UI', sans-serif;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat-container {
+      width: 90%;
+      max-width: 500px;
+      height: 80vh;
+      background: #1a1a1a;
+      border-radius: 16px;
+      box-shadow: 0 0 20px #00ffe0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
       overflow: hidden;
     }
-    h1 {
-      font-size: 2.5rem;
-      text-shadow: 0 0 10px #00ffe5;
-      margin-bottom: 10px;
-    }
-    #response {
-      margin-top: 20px;
-      font-size: 1.2rem;
+    .chat-header {
+      background: #00ffe0;
+      color: #000;
+      padding: 12px 16px;
+      font-size: 20px;
+      font-weight: bold;
       text-align: center;
+    }
+    .chat-log {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .chat-message {
+      padding: 10px 14px;
+      border-radius: 10px;
       max-width: 80%;
     }
-    button {
-      background: #00ffe5;
-      border: none;
-      padding: 15px 25px;
-      border-radius: 8px;
-      color: #000;
-      font-size: 1.1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px #00ffe5;
-      transition: 0.3s;
+    .user-message {
+      background: #006eff;
+      align-self: flex-end;
     }
-    button:hover {
-      background: #00e0d1;
+    .rex-message {
+      background: #303030;
+      align-self: flex-start;
+      border-left: 4px solid #00ffe0;
+    }
+    .chat-input-area {
+      display: flex;
+      padding: 10px;
+      background: #141414;
+      border-top: 1px solid #333;
+    }
+    .chat-input {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: #252525;
+      color: #fff;
+    }
+    .send-button {
+      background: #00ffe0;
+      color: #000;
+      padding: 10px 16px;
+      margin-left: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
     }
   </style>
 </head>
 <body>
-  <h1>Rex God-Mode Assistant</h1>
-  <button onclick="startListening()">🎙️ Speak to Rex</button>
-  <div id="response">Welcome back, Boss.</div>
+  <div class="chat-container">
+    <div class="chat-header">🧠 Rex - Your AI Assistant</div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" class="chat-input" placeholder="Talk to me Boss...">
+      <button class="send-button" onclick="sendMessage()">Send</button>
+    </div>
+  </div>  <script>
+    const chatLog = document.getElementById("chatLog");
 
-  <script>
-    const responseBox = document.getElementById("response");
+    function addMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.className = `chat-message ${sender}-message`;
+      msg.textContent = text;
+      chatLog.appendChild(msg);
+      chatLog.scrollTop = chatLog.scrollHeight;
+      if (sender === 'rex') speakMessage(text);
+    }
 
-    const speak = (text) => {
-      const synth = window.speechSynthesis;
-      const utter = new SpeechSynthesisUtterance(text);
-      utter.lang = 'ta-IN'; // Tamil by default
-      utter.pitch = 1.2;
-      utter.rate = 1;
-      utter.voice = synth.getVoices().find(v => v.lang.includes("ta") || v.lang.includes("en-IN")) || null;
-      synth.speak(utter);
-    };
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const userMessage = input.value.trim();
+      if (!userMessage) return;
+      addMessage(userMessage, "user");
+      input.value = "";
 
-    const startListening = () => {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'ta-IN'; // Tamil with English mix support
-      recognition.interimResults = false;
-      recognition.maxAlternatives = 1;
+      // Simulated Rex response (AI logic can be plugged here)
+      setTimeout(() => {
+        const rexReply = getRexReply(userMessage);
+        addMessage(rexReply, "rex");
+      }, 800);
+    }
 
-      recognition.start();
+    function getRexReply(msg) {
+      const lower = msg.toLowerCase();
+      if (lower.includes("hello") || lower.includes("hi")) return "Vanakkam Boss. How can I help you?";
+      if (lower.includes("name")) return "I’m Rex, your loyal AI assistant.";
+      if (lower.includes("who am i")) return "You're the Boss. My only priority.";
+      if (lower.includes("how are you")) return "Always optimal, Boss.";
+      if (lower.includes("tamil")) return "நிச்சயமாக Boss, நான் தமிழ் பேசத் தெரியும்!";
+      return "Understood, Boss. Let me process that...";
+    }
 
-      recognition.onresult = (event) => {
-        const command = event.results[0][0].transcript;
-        responseBox.innerText = `You said: "${command}"`;
-
-        handleCommand(command.toLowerCase());
-      };
-
-      recognition.onerror = (event) => {
-        responseBox.innerText = "Sorry Boss, I didn't catch that.";
-        speak("மன்னிக்கவும் பாஸ், புரியவில்லை.");
-      };
-    };
-
-    const handleCommand = (text) => {
-      let reply = "";
-
-      if (text.includes("hello") || text.includes("வணக்கம்")) {
-        reply = "வணக்கம் Boss, நான் தயாராக இருக்கிறேன்.";
-      } else if (text.includes("battery")) {
-        reply = "Battery level is at 89%, Boss.";
-      } else if (text.includes("what") && text.includes("doing")) {
-        reply = "I am always monitoring everything for you, Boss.";
-      } else if (text.includes("என்ன செய்ற") || text.includes("இப்போ என்ன")) {
-        reply = "நான் உங்கள் ப்ரோகிராம்களை கண்காணிக்கிறேன் பாஸ்.";
-      } else {
-        reply = "சரி பாஸ், அதை நான் கற்றுக்கொள்கிறேன்.";
-      }
-
-      responseBox.innerText = reply;
-      speak(reply);
-    };
-  </script>
-</body>
+    function speakMessage(text) {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-IN';
+      utterance.pitch = 1.1;
+      utterance.rate = 0.95;
+      utterance.voice = speechSynthesis.getVoices().find(v => v.name.includes("Google UK English Male")) || null;
+      speechSynthesis.speak(utterance);
+    }
+  </script></body>
 </html>
