@@ -9,11 +9,11 @@
 <body>
   <div id="rex-container">
     <div id="rex-display">
-      <div id="rex-output">Rex Online. Awaiting your command, Boss...</div>
+      <div id="rex-output">👑 Rex is online. Loyalty mode active.</div>
       <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus />
       <button id="rex-send">Send</button>
     </div>
-    <div id="rex-voice-toggle">🎤</div>
+    <div id="rex-voice-toggle" title="Tap to speak">🎤</div>
   </div>
 
   <script src="rex.js"></script>
