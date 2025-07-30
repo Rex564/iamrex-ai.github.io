@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rex AI - Boss Interface</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="rex-container">
+    <div id="rex-display">
+      <div id="rex-output">Rex Online. Awaiting your command, Boss...</div>
+      <input id="rex-input" type="text" placeholder="Speak or Type..." autofocus />
+      <button id="rex-send">Send</button>
+    </div>
+    <div id="rex-voice-toggle">🎤</div>
+  </div>
+
+  <script src="rex.js"></script>
+</body>
+</html>
