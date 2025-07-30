@@ -1,0 +1,30 @@
+body {
+  background-color: #0e0e0e;
+  color: #00ffe0;
+  font-family: 'Orbitron', sans-serif;
+  text-align: center;
+  padding: 2rem;
+}
+
+#rex-box {
+  border: 2px solid #00ffe0;
+  border-radius: 20px;
+  padding: 2rem;
+  background: #1a1a1a;
+  box-shadow: 0 0 30px #00ffe0;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 1rem;
+  margin: 10px;
+  border-radius: 8px;
+  border: none;
+}
+
+#mic {
+  background-color: #00ffe0;
+  color: black;
+  border-radius: 50%;
+  padding: 15px;
+}
