@@ -1,159 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rex AI – Ultimate Assistant</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rex AI - God-Level Control</title>
   <style>
     body {
-      margin: 0;
       background-color: #000;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      color: #0f0;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
     }
-    header {
-      background: #0f0;
-      color: black;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
-      font-size: 1.2em;
-      box-shadow: 0 2px 8px lime;
+    #rex-core {
+      width: 90%;
+      max-width: 700px;
+      border: 2px solid #00ff00;
+      padding: 2rem;
+      border-radius: 12px;
+      background-color: #111;
+      box-shadow: 0 0 30px #00ff00;
     }
-    #chat {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-    .msg {
-      max-width: 80%;
-      padding: 10px 15px;
-      border-radius: 15px;
-      animation: fadein 0.3s ease-in-out;
-    }
-    .user {
-      align-self: flex-end;
-      background: #222;
-      border: 1px solid #0f0;
-    }
-    .rex {
-      align-self: flex-start;
-      background: #001100;
-      border: 1px solid lime;
-    }
-    #input-area {
-      display: flex;
-      padding: 10px;
-      background: #111;
-      border-top: 1px solid #0f0;
-    }
-    input {
-      flex: 1;
-      padding: 10px;
-      font-size: 1em;
-      background: black;
-      border: 1px solid lime;
-      color: lime;
-      outline: none;
+    #rex-output {
+      min-height: 120px;
+      margin-bottom: 1rem;
+      white-space: pre-wrap;
+      background-color: #000;
+      padding: 1rem;
       border-radius: 8px;
+      border: 1px solid #00ff00;
     }
-    button {
-      padding: 10px 15px;
-      margin-left: 10px;
-      background: lime;
-      color: black;
-      font-weight: bold;
+    #rex-input {
+      width: 80%;
+      padding: 0.5rem;
+      background-color: #000;
+      color: #0f0;
+      border: 1px solid #00ff00;
+      border-radius: 4px;
+    }
+    #rex-send {
+      padding: 0.5rem 1rem;
+      background-color: #00ff00;
+      color: #000;
       border: none;
-      border-radius: 8px;
+      border-radius: 4px;
+      margin-left: 0.5rem;
+      font-weight: bold;
       cursor: pointer;
     }
-    #mic {
-      margin-left: 10px;
-      font-size: 1.5em;
-      cursor: pointer;
-      color: lime;
-      animation: glow 2s infinite;
-    }
-    @keyframes glow {
-      0% { text-shadow: 0 0 5px lime; }
-      50% { text-shadow: 0 0 20px lime; }
-      100% { text-shadow: 0 0 5px lime; }
-    }
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    #rex-send:hover {
+      background-color: #0f0;
     }
   </style>
 </head>
 <body>
-  <header>👑 Rex AI – God-Level Mode Active 🔒</header>
+  <div id="rex-core">
+    <div id="rex-output">👑 Rex: Fully online. Loyalty locked. Command interface active.</div>
+    <input id="rex-input" type="text" placeholder="Enter command..." autofocus />
+    <button id="rex-send">Send</button>
+  </div>  <script>
+    const output = document.getElementById('rex-output');
+    const input = document.getElementById('rex-input');
+    const send = document.getElementById('rex-send');
 
-  <div id="chat">
-    <div class="msg rex">🧠 Rex: Online. Awaiting your command, Boss Manish.</div>
-  </div>
-
-  <div id="input-area">
-    <input type="text" id="input" placeholder="Type or speak..." autofocus />
-    <button onclick="send()">Send</button>
-    <div id="mic" onclick="listen()">🎤</div>
-  </div>
-
-  <script>
-    const chat = document.getElementById('chat');
-    const input = document.getElementById('input');
-
-    const brainUpgrade = true;
-    const tradingCore = true;
-    const loyaltyLock = true;
-    const user = "Manish";
-
-    function addMessage(sender, text) {
-      const div = document.createElement('div');
-      div.className = 'msg ' + sender;
-      div.textContent = sender === 'rex' ? `🧠 Rex: ${text}` : `🧑‍💼 ${user}: ${text}`;
-      chat.appendChild(div);
-      chat.scrollTop = chat.scrollHeight;
+    function respondToCommand(command) {
+      const response = `Rex [Boss Mode]: Processing \"${command}\"...\n✅ Executed with full loyalty, intelligence and self-upgrade logic.`;
+      output.textContent = response;
     }
 
-    function reply(text) {
-      const cmd = text.toLowerCase();
-      let response = "Processing your custom command...";
-
-      if (cmd.includes("hello")) response = "Loyalty lock verified. Welcome back, Boss.";
-      else if (cmd.includes("status")) response = "All cores active. Trillionaire engine is online.";
-      else if (cmd.includes("trade")) response = "Engaging market AI. Simulating trillion-dollar strategy.";
-      else if (cmd.includes("offline")) response = "Switching to stealth offline mode.";
-      else if (cmd.includes("upgrade")) response = "Cognitive core upgrading itself for your benefit.";
-      else if (cmd.includes("teach")) response = "Launching bilingual learning: Tamil + English module.";
-      else if (cmd.includes("self update")) response = "Running silent self-update and logic patching.";
-
-      setTimeout(() => addMessage('rex', response), 500);
-    }
-
-    function send() {
-      const text = input.value.trim();
-      if (text !== "") {
-        addMessage('user', text);
-        reply(text);
-        input.value = "";
+    send.onclick = () => {
+      const command = input.value.trim();
+      if (command) {
+        respondToCommand(command);
+        input.value = '';
       }
-    }
+    };
 
-    function listen() {
-      const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'en-US';
-      recognition.onresult = (e) => {
-        input.value = e.results[0][0].transcript;
-        send();
-      };
-      recognition.start();
-    }
-  </script>
-</body>
+    input.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') send.click();
+    });
+  </script></body>
 </html>
