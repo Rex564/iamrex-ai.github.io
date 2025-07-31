@@ -1,85 +1,22 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rex AI - God-Level Control</title>
-  <style>
-    body {
-      background-color: #000;
-      color: #00ff00;
-      font-family: 'Courier New', monospace;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    #rex-core {
-      width: 90%;
-      max-width: 700px;
-      border: 2px solid #00ff00;
-      padding: 2rem;
-      border-radius: 12px;
-      background-color: #111;
-      box-shadow: 0 0 30px #00ff00;
-    }
-    #rex-output {
-      min-height: 120px;
-      margin-bottom: 1rem;
-      white-space: pre-wrap;
-      background-color: #000;
-      padding: 1rem;
-      border-radius: 8px;
-      border: 1px solid #00ff00;
-    }
-    #rex-input {
-      width: 80%;
-      padding: 0.5rem;
-      background-color: #000;
-      color: #0f0;
-      border: 1px solid #00ff00;
-      border-radius: 4px;
-    }
-    #rex-send {
-      padding: 0.5rem 1rem;
-      background-color: #00ff00;
-      color: #000;
-      border: none;
-      border-radius: 4px;
-      margin-left: 0.5rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #rex-send:hover {
-      background-color: #0f0;
-    }
-  </style>
+  <title>Rex AI - God-Level Assistant</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="rex-core">
-    <div id="rex-output">👑 Rex: Fully online. Loyalty locked. Command interface active.</div>
-    <input id="rex-input" type="text" placeholder="Enter command..." autofocus />
-    <button id="rex-send">Send</button>
-  </div>  <script>
-    const output = document.getElementById('rex-output');
-    const input = document.getElementById('rex-input');
-    const send = document.getElementById('rex-send');
+  <div id="rex-container">
+    <div id="rex-header">👑 Rex AI — God Mode Activated</div>
+    <div id="rex-display">
+      <div id="rex-output">🔒 Welcome back, Boss. Loyalty mode: MAX | Brain: CUSTOM</div>
+      <input id="rex-input" type="text" placeholder="Ask anything..." autofocus />
+      <button id="rex-send">Send</button>
+    </div>
+    <div id="rex-voice-toggle" title="Tap to speak">🎤</div>
+  </div>
 
-    function respondToCommand(command) {
-      const response = `Rex [Boss Mode]: Processing \"${command}\"...\n✅ Executed with full loyalty, intelligence and self-upgrade logic.`;
-      output.textContent = response;
-    }
-
-    send.onclick = () => {
-      const command = input.value.trim();
-      if (command) {
-        respondToCommand(command);
-        input.value = '';
-      }
-    };
-
-    input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter') send.click();
-    });
-  </script></body>
+  <script src="rex.js"></script>
+</body>
 </html>
