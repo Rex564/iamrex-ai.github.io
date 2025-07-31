@@ -1,34 +1,29 @@
-const output = document.getElementById("rex-output");
+const messages = document.getElementById("rex-messages");
 const input = document.getElementById("rex-input");
-const sendBtn = document.getElementById("rex-send");
-const voiceBtn = document.getElementById("rex-voice-toggle");
+const sendButton = document.getElementById("rex-send");
 
-function respond(message) {
-  output.innerText = "🤖 Rex: " + message;
-}
+sendButton.addEventListener("click", sendMessage);
+input.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") sendMessage();
+});
 
-function processCommand(command) {
-  const cmd = command.toLowerCase();
-  if (cmd.includes("trillionaire")) {
-    respond("🚀 Activating Trillionaire Trading Core. Simulating secure profit path...");
-    simulateTrade();
-  } else if (cmd.includes("scan") || cmd.includes("trade")) {
-    respond("📊 Scanning market using AI logic...");
-    setTimeout(() => respond("✅ Best trade found. Securing with Loyalty Lock."), 2000);
-  } else if (cmd.includes("loyalty")) {
-    respond("🔒 Loyalty Mode is already maxed and locked to Boss only.");
-  } else if (cmd.includes("self update")) {
-    respond("⚙️ Rex is upgrading in background with God-Tier enhancements.");
-  } else {
-    respond("🤖 Rex received: " + command);
-  }
-}
+function sendMessage() {
+  const userInput = input.value.trim();
+  if (!userInput) return;
 
-function simulateTrade() {
+  appendMessage(userInput, "user");
+  input.value = "";
+
   setTimeout(() => {
-    respond("💹 Simulated gain: ₹2.3 Cr in 4 weeks. Estimated path ready.");
-  }, 2500);
+    appendMessage("🤖 Rex: Processing your command with full loyalty, Boss...", "rex");
+    // You can later connect this with AI backend
+  }, 500);
 }
 
-sendBtn.addEventListener("click", () => {
-  const command = input.value;
+function appendMessage(text, sender) {
+  const message = document.createElement("div");
+  message.className = `message ${sender}`;
+  message.textContent = text;
+  messages.appendChild(message);
+  messages.scrollTop = messages.scrollHeight;
+}
