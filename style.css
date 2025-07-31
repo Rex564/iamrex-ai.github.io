@@ -1,60 +1,87 @@
 body {
   margin: 0;
-  background: black;
-  color: lime;
-  font-family: 'Courier New', monospace;
+  font-family: 'Segoe UI', sans-serif;
+  background: #0f0f0f;
+  color: #e1e1e1;
 }
 
 #rex-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
 }
 
-#rex-display {
-  background: #111;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px lime;
-  width: 90%;
-  max-width: 500px;
+#rex-header {
+  background: #222;
+  padding: 15px;
+  font-size: 1.2rem;
   text-align: center;
+  color: #00ff99;
+  border-bottom: 1px solid #444;
 }
 
-#rex-output {
-  margin-bottom: 15px;
-  font-size: 1.2em;
+#rex-chat-window {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#rex-messages {
+  padding: 20px;
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.message {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.rex {
+  background-color: #1e1e1e;
+  color: #00ff99;
+  align-self: flex-start;
+}
+
+.user {
+  background-color: #333;
+  color: #ffffff;
+  align-self: flex-end;
+}
+
+#rex-input-area {
+  display: flex;
+  padding: 10px;
+  background-color: #111;
+  border-top: 1px solid #333;
 }
 
 #rex-input {
-  width: 80%;
+  flex-grow: 1;
   padding: 10px;
+  background: #222;
+  color: white;
   border: none;
-  background: black;
-  color: lime;
-  border: 1px solid lime;
+  border-radius: 5px;
 }
 
 #rex-send {
-  background: lime;
-  color: black;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
   margin-left: 10px;
+  padding: 10px 20px;
+  background-color: #00ff99;
+  border: none;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
 }
 
 #rex-voice-toggle {
-  font-size: 2em;
-  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 1.5rem;
   cursor: pointer;
-  animation: glow 2s infinite;
-}
-
-@keyframes glow {
-  0% { color: lime; }
-  50% { color: #0f0; }
-  100% { color: lime; }
+  color: #00ff99;
 }
